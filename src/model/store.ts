@@ -10,8 +10,8 @@ import { $allTodosAreCompleted } from './todos-completed';
 
 const todoStore = store<Todo>(getLocalStorageData());
 
-export const $getTodo = (id: TodoId) => todoStore.get(id);
-export const getTodo = (id: TodoId) => $getTodo(id)();
+export const getTodoAtom = (id: TodoId) => todoStore.getAtom(id);
+export const getTodo = (id: TodoId) => todoStore.get(id);
 
 on(todoStore.data, setLocalStorageData);
 

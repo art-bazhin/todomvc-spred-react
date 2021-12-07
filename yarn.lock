@@ -10425,10 +10425,10 @@
   "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.0.2.tgz"
   "version" "0.0.2"
 
-"spred@^0.7.2", "spred@>=0.3.1":
-  "integrity" "sha512-1ukCpbAGtJKezFwNinDWQ8RGX8qWEUHX9+cYwvwe/4HKWJydmq1XiaSzwFA3KGRouHmQY1epJfD6yysqwtcL7w=="
-  "resolved" "https://registry.npmjs.org/spred/-/spred-0.7.2.tgz"
-  "version" "0.7.2"
+"spred@^0.8.0", "spred@>=0.3.1":
+  "integrity" "sha512-k1jQXbFzy17DW8odnMGpFwbb4qLyQnO4wPKr2wMi2IH4rHkUcWBPKxZLvJ0xBYxC4351UzEVDTEX8+EYBVid2Q=="
+  "resolved" "https://registry.npmjs.org/spred/-/spred-0.8.0.tgz"
+  "version" "0.8.0"
 
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="

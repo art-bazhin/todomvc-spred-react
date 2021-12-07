@@ -3,7 +3,7 @@ import { computed } from 'spred';
 import { useAtom } from 'spred-react';
 import { $editedTodo, endEditTodo, startEditTodo } from '../../model/edit';
 import { removeTodo } from '../../model/remove';
-import { $getTodo, getTodo } from '../../model/store';
+import { getTodoAtom, getTodo } from '../../model/store';
 import { toggleTodo } from '../../model/toggle';
 import { TodoItem } from './TodoItem';
 
@@ -12,8 +12,11 @@ interface TodoItemAdapterProps {
 }
 
 export const TodoItemAdapter = memo(({ id }: TodoItemAdapterProps) => {
-  const todo = (useAtom as any)($getTodo(id), [id]);
-  const editing = useAtom(() => computed(() => getTodo(id) === $editedTodo()));
+  const todo = useAtom(getTodoAtom(id), [id]);
+  const editing = useAtom(
+    () => computed(() => getTodo(id) === $editedTodo()),
+    [id]
+  );
 
   if (!todo) return null;
 
