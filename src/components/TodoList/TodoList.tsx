@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useAtom } from 'spred-react';
 import { $allTodosCount } from '../../model/todos-all';
 import { $allTodosAreCompleted } from '../../model/todos-completed';
-import { $shownTodoIds } from '../../model/todos-shown';
+import { $filteredTodoIds } from '../../model/todos-filtered';
 import { toggleAll } from '../../model/toggle';
 import { TodoItemAdapter } from '../TodoItem/TodoItemAdapter';
 
@@ -11,7 +11,7 @@ export const TodoList = memo(() => {
 
   const allTodosCount = useAtom($allTodosCount);
   const allTodosAreCompleted = useAtom($allTodosAreCompleted);
-  const shownTodoIds = useAtom($shownTodoIds);
+  const filteredTodoIds = useAtom($filteredTodoIds);
 
   return (
     <section className="main">
@@ -27,7 +27,7 @@ export const TodoList = memo(() => {
       ) : null}
 
       <ul className="todo-list">
-        {shownTodoIds.map((id) => (
+        {filteredTodoIds.map((id) => (
           <TodoItemAdapter id={id} key={id} />
         ))}
       </ul>
