@@ -1,10 +1,6 @@
-import { memo } from 'react';
-import { computed } from 'spred';
+import { memo, useMemo } from 'react';
 import { useAtom } from 'spred-react';
-import { $editedTodo, endEditTodo, startEditTodo } from '../../model/edit';
-import { removeTodo } from '../../model/remove';
-import { getTodoAtom, getTodo } from '../../model/store';
-import { toggleTodo } from '../../model/toggle';
+import { createTodoModel } from '../../model/todo-model';
 import { TodoItem } from './TodoItem';
 
 interface TodoItemAdapterProps {
@@ -12,11 +8,10 @@ interface TodoItemAdapterProps {
 }
 
 export const TodoItemAdapter = memo(({ id }: TodoItemAdapterProps) => {
-  const todo = useAtom(getTodoAtom(id), [id]);
-  const editing = useAtom(
-    () => computed(() => getTodo(id) === $editedTodo()),
-    [id]
-  );
+  const model = useMemo(() => createTodoModel(id), [id]);
+
+  const todo = useAtom(model.$todo, [model]);
+  const editing = useAtom(model.$editing, [model]);
 
   if (!todo) return null;
 
@@ -24,15 +19,10 @@ export const TodoItemAdapter = memo(({ id }: TodoItemAdapterProps) => {
     <TodoItem
       todo={todo}
       editing={editing}
-      toggle={() => toggleTodo(todo)}
-      remove={() => removeTodo(todo.id)}
-      startEdit={() => startEditTodo(todo)}
-      endEdit={(description) =>
-        endEditTodo({
-          ...todo,
-          description,
-        })
-      }
+      toggle={model.toggle}
+      remove={model.remove}
+      startEdit={model.startEdit}
+      endEdit={model.endEdit}
     />
   );
 });
