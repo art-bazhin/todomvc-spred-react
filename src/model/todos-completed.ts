@@ -1,5 +1,5 @@
 import { computed, on } from 'spred';
-import { removeCompletedSignal, removeTodo } from './remove';
+import { removeCompletedSignal, removeTodos } from './remove';
 import { $allTodos, $allTodosCount } from './todos-all';
 
 export const $completedTodos = computed(() =>
@@ -17,5 +17,5 @@ export const $allTodosAreCompleted = computed(
 );
 
 on(removeCompletedSignal, () => {
-  $completedTodoIds().forEach(removeTodo);
+  removeTodos($completedTodoIds());
 });

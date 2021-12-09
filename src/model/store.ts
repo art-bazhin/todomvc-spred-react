@@ -2,7 +2,7 @@ import { on, store } from 'spred';
 import { addTodoSignal } from './add';
 import { endEditTodoSignal } from './edit';
 import { $allTodos } from './todos-all';
-import { removeTodoSignal } from './remove';
+import { removeTodosSignal } from './remove';
 import { getLocalStorageData, setLocalStorageData } from './local-storage';
 import { Todo, TodoId } from './todo';
 import { toggleAllSignal, toggleTodoSignal } from './toggle';
@@ -43,6 +43,6 @@ on(endEditTodoSignal, (todo) => {
   todoStore.set(todo);
 });
 
-on(removeTodoSignal, (id) => {
+on(removeTodosSignal, (id) => {
   todoStore.delete(id);
 });

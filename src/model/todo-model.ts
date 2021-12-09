@@ -1,6 +1,6 @@
 import { computed } from 'spred';
 import { $editedTodo, endEditTodo, startEditTodo } from './edit';
-import { removeTodo } from './remove';
+import { removeTodos } from './remove';
 import { getTodoAtom } from './store';
 import { toggleTodo } from './toggle';
 
@@ -37,7 +37,7 @@ export function createTodoModel(id: string) {
     },
 
     remove() {
-      removeTodo(id);
+      removeTodos([id]);
     },
   };
 }

@@ -1,6 +1,6 @@
 import { computed, on, readonly, writable } from 'spred';
 import { addTodoSignal } from './add';
-import { removeTodoSignal } from './remove';
+import { removeTodosSignal } from './remove';
 import { getLocalStorageIds, setLocalStorageIds } from './local-storage';
 import { getTodo } from './store';
 import { Todo } from './todo';
@@ -27,7 +27,7 @@ on(addTodoSignal, (todo) => {
   _$allTodoIds.notify();
 });
 
-on(removeTodoSignal, (removedTodoId) => {
+on(removeTodosSignal, (removedTodoIds) => {
   const ids = _$allTodoIds();
-  _$allTodoIds(ids.filter((id) => id !== removedTodoId));
+  _$allTodoIds(ids.filter((id) => !removedTodoIds.includes(id)));
 });

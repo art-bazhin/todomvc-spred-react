@@ -1,5 +1,5 @@
 import { on, readonly, signal, writable } from 'spred';
-import { removeTodo } from './remove';
+import { removeTodos } from './remove';
 import { Todo } from './todo';
 
 type EditedTodo = Todo;
@@ -16,5 +16,5 @@ on(startEditTodoSignal, (todo) => {
 
 on(endEditTodoSignal, (payload) => {
   _$editedTodo(null);
-  if (!payload.description) removeTodo(payload.id);
+  if (!payload.description) removeTodos([payload.id]);
 });
