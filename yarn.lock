@@ -10248,10 +10248,10 @@
   dependencies:
     "extend-shallow" "^3.0.0"
 
-"spred-react@^0.0.2":
-  "integrity" "sha512-Wue6v8phm5sE05jXvmzXR+wlsR7HPk6afiuxcWLt8LPy9qxbQhcyaRf2c8flxRTw0gZIpvMWLcoZHR4TIht3xQ=="
-  "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.0.2.tgz"
-  "version" "0.0.2"
+"spred-react@^0.0.3":
+  "integrity" "sha512-SfPmqPB6e793IWjh2swGNhehuYN5M1Zp7u9LuixE0mJo6pdX0kL9Sq3a1toCLWL2QwkoTc+IHpctsiDTJLKQJA=="
+  "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.0.3.tgz"
+  "version" "0.0.3"
 
 "spred@^0.9.3", "spred@>=0.3.1":
   "integrity" "sha512-/8r05b+gSvQMZ3v/fYnC4HiRFWqXYWEp1rTF/lWp7Ts+rKxKehea9Z+nzwCWdRrB3YjbCUeCc3gW5cyWOyuz9w=="
