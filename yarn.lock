@@ -10253,10 +10253,10 @@
   "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.0.3.tgz"
   "version" "0.0.3"
 
-"spred@^0.9.3", "spred@>=0.3.1":
-  "integrity" "sha512-/8r05b+gSvQMZ3v/fYnC4HiRFWqXYWEp1rTF/lWp7Ts+rKxKehea9Z+nzwCWdRrB3YjbCUeCc3gW5cyWOyuz9w=="
-  "resolved" "https://registry.npmjs.org/spred/-/spred-0.9.3.tgz"
-  "version" "0.9.3"
+"spred@^0.10.1", "spred@>=0.3.1":
+  "integrity" "sha512-35505zxIUS2GPv7YFyxjPTiFBvq+Ce9Egd/9v/Sy66kGjSXUWDjd8vWvtj1DdCl+wJoY5eoFYGlFXsKRfTiP/g=="
+  "resolved" "https://registry.npmjs.org/spred/-/spred-0.10.1.tgz"
+  "version" "0.10.1"
 
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="

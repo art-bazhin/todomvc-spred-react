@@ -1,7 +1,7 @@
 import { Todo } from './todo';
 
 interface TodoData {
-  [key: string]: Todo | undefined;
+  [key: string]: Todo | null;
 }
 
 const DATA_KEY = 'TODO_DATA';

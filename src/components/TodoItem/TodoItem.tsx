@@ -19,7 +19,7 @@ export const TodoItem = memo(
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key !== 'Enter') return;
       e.preventDefault();
-      edit();
+      editInput.current?.blur();
     };
 
     useLayoutEffect(() => {
