@@ -1,12 +1,12 @@
-import { computed } from 'spred';
-import { $editedTodo, endEditTodo, startEditTodo } from './edit';
+import { memo } from 'spred';
+import { $editedTodo, editTodo, setEditedTodo } from './edit';
 import { removeTodos } from './remove';
 import { getTodoAtom } from './store';
 import { toggleTodo } from './toggle';
 
 export function createTodoModel(id: string) {
   const $todo = getTodoAtom(id);
-  const $editing = computed(() => $todo() === $editedTodo());
+  const $editing = memo(() => $todo() === $editedTodo());
 
   return {
     $todo,
@@ -23,14 +23,14 @@ export function createTodoModel(id: string) {
       const todo = $todo();
       if (!todo) return;
 
-      startEditTodo(todo);
+      setEditedTodo(todo);
     },
 
     endEdit(newDescription: string) {
       const todo = $todo();
       if (!todo) return;
 
-      endEditTodo({
+      editTodo({
         ...todo,
         description: newDescription,
       });

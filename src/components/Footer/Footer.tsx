@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useAtom } from 'spred-react';
+import { useSignal } from 'spred-react';
 import { $filter, TodoFilter } from '../../model/filter';
 import { removeCompleted } from '../../model/remove';
 import { $activeTodosCount } from '../../model/todos-active';
@@ -9,10 +9,10 @@ import { $completedTodosCount } from '../../model/todos-completed';
 export const Footer = memo(() => {
   console.log('render Footer');
 
-  const filter = useAtom($filter);
-  const allTodosCount = useAtom($allTodosCount);
-  const activeTodosCount = useAtom($activeTodosCount);
-  const completedTodosCount = useAtom($completedTodosCount);
+  const filter = useSignal($filter);
+  const allTodosCount = useSignal($allTodosCount);
+  const activeTodosCount = useSignal($activeTodosCount);
+  const completedTodosCount = useSignal($completedTodosCount);
   const isPlural = activeTodosCount !== 1;
 
   if (!allTodosCount) return null;

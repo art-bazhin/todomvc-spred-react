@@ -1,4 +1,4 @@
-import { computed, writable } from 'spred';
+import { memo, writable } from 'spred';
 
 export type TodoFilter = 'all' | 'completed' | 'active';
 
@@ -8,7 +8,7 @@ window.addEventListener('hashchange', () => {
   $hash(window.location.hash);
 });
 
-export const $filter = computed<TodoFilter>(() => {
+export const $filter = memo<TodoFilter>(() => {
   const hash = $hash();
   if (hash.substr(0, 2) !== '#/') return 'all';
 

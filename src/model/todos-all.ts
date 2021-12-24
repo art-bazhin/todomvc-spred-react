@@ -1,16 +1,15 @@
-import { computed, on, readonly, writable } from 'spred';
-import { addTodoSignal } from './add';
-import { removeTodosSignal } from './remove';
+import { on, signal, memo } from 'spred';
+import { $addTodo } from './add';
+import { $removeTodos } from './remove';
 import { getLocalStorageIds, setLocalStorageIds } from './local-storage';
 import { getTodo } from './store';
 import { Todo } from './todo';
 
 const todoIds = getLocalStorageIds();
-const _$allTodoIds = writable<string[]>(todoIds);
 
-export const $allTodoIds = readonly(_$allTodoIds);
+export const [$allTodoIds, setAllTodoIds] = signal(todoIds);
 
-export const $allTodos = computed(() =>
+export const $allTodos = memo(() =>
   $allTodoIds().reduce((acc, cur) => {
     const todo = getTodo(cur);
     if (todo) acc.push(todo);
@@ -18,16 +17,19 @@ export const $allTodos = computed(() =>
   }, [] as Todo[])
 );
 
-export const $allTodosCount = computed(() => $allTodoIds().length);
+export const $allTodosCount = memo(() => $allTodoIds().length);
 
-on(_$allTodoIds, setLocalStorageIds);
+on($allTodoIds, setLocalStorageIds);
 
-on(addTodoSignal, (todo) => {
-  _$allTodoIds().push(todo.id);
-  _$allTodoIds.notify();
+on($addTodo, (todo) => {
+  const arr = $allTodoIds();
+
+  arr.push(todo.id);
+  setAllTodoIds(arr);
 });
 
-on(removeTodosSignal, (removedTodoIds) => {
-  const ids = _$allTodoIds();
-  _$allTodoIds(ids.filter((id) => !removedTodoIds.includes(id)));
+on($removeTodos, (removedTodoIds) => {
+  const ids = $allTodoIds();
+
+  setAllTodoIds(ids.filter((id) => !removedTodoIds.includes(id)));
 });

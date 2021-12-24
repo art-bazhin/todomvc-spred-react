@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useAtom } from 'spred-react';
+import { useSignal } from 'spred-react';
 import { $allTodosCount } from '../../model/todos-all';
 import { $allTodosAreCompleted } from '../../model/todos-completed';
 import { $filteredTodoIds } from '../../model/todos-filtered';
@@ -9,9 +9,9 @@ import { TodoItemAdapter } from '../TodoItem/TodoItemAdapter';
 export const TodoList = memo(() => {
   console.log('render TodoList');
 
-  const allTodosCount = useAtom($allTodosCount);
-  const allTodosAreCompleted = useAtom($allTodosAreCompleted);
-  const filteredTodoIds = useAtom($filteredTodoIds);
+  const allTodosCount = useSignal($allTodosCount);
+  const allTodosAreCompleted = useSignal($allTodosAreCompleted);
+  const filteredTodoIds = useSignal($filteredTodoIds);
 
   return (
     <section className="main">

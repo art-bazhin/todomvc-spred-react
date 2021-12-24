@@ -1,21 +1,21 @@
-import { computed, on } from 'spred';
-import { removeCompletedSignal, removeTodos } from './remove';
+import { memo, on } from 'spred';
+import { $removeCompleted, removeTodos } from './remove';
 import { $allTodos, $allTodosCount } from './todos-all';
 
-export const $completedTodos = computed(() =>
+export const $completedTodos = memo(() =>
   $allTodos().filter((todo) => todo.completed)
 );
 
-export const $completedTodoIds = computed(() =>
+export const $completedTodoIds = memo(() =>
   $completedTodos().map((todo) => todo.id)
 );
 
-export const $completedTodosCount = computed(() => $completedTodos().length);
+export const $completedTodosCount = memo(() => $completedTodos().length);
 
-export const $allTodosAreCompleted = computed(
+export const $allTodosAreCompleted = memo(
   () => !!$allTodosCount() && $completedTodosCount() === $allTodosCount()
 );
 
-on(removeCompletedSignal, () => {
+on($removeCompleted, () => {
   removeTodos($completedTodoIds());
 });

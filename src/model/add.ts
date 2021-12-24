@@ -1,7 +1,11 @@
-import { on, signal, writable } from 'spred';
+import { on, signal, memo } from 'spred';
 import { Todo } from './todo';
 
-export const $newTodoDescription = writable('');
-export const [addTodoSignal, addTodo] = signal<Todo>();
+export const [$newTodoDescription, setNewTodoDescription] = signal('');
+export const [$addTodo, addTodo] = signal<Todo>();
 
-on(addTodoSignal, () => $newTodoDescription(''));
+export const $trimmedNewTodoDescription = memo(() =>
+  $newTodoDescription().trim()
+);
+
+on($addTodo, () => setNewTodoDescription(''));
