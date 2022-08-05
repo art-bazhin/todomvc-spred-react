@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import { useSignal } from 'spred-react';
+import { getTodoSignal } from '../../model/store';
 import { createTodoModel } from '../../model/todo-model';
 import { TodoItem } from './TodoItem';
 
@@ -8,10 +9,10 @@ interface TodoItemAdapterProps {
 }
 
 export const TodoItemAdapter = memo(({ id }: TodoItemAdapterProps) => {
-  const model = useMemo(() => createTodoModel(id), [id]);
+  const model = useMemo(() => createTodoModel(getTodoSignal(id)), [id]);
 
-  const todo = useSignal(model.$todo, [model]);
-  const editing = useSignal(model.$editing, [model]);
+  const todo = useSignal(model.todo, [model]);
+  const editing = useSignal(model.editing, [model]);
 
   if (!todo) return null;
 

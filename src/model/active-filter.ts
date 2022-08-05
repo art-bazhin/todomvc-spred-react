@@ -2,17 +2,16 @@ import { memo, writable } from 'spred';
 
 export type TodoFilter = 'all' | 'completed' | 'active';
 
-const $hash = writable<string>(window.location.hash);
+const hash = writable<string>(window.location.hash);
 
 window.addEventListener('hashchange', () => {
-  $hash(window.location.hash);
+  hash(window.location.hash);
 });
 
-export const $filter = memo<TodoFilter>(() => {
-  const hash = $hash();
-  if (hash.substr(0, 2) !== '#/') return 'all';
+export const activeFilter = memo<TodoFilter>(() => {
+  if (hash().substring(0, 2) !== '#/') return 'all';
 
-  const filter = hash.substr(2);
+  const filter = hash().substring(2);
 
   switch (filter) {
     case 'all':

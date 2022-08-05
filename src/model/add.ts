@@ -1,11 +1,13 @@
-import { on, signal, memo } from 'spred';
-import { Todo } from './todo';
+import { computed, signal } from 'spred';
+import { createTodo } from './todo';
 
-export const [$newTodoDescription, setNewTodoDescription] = signal('');
-export const [$addTodo, addTodo] = signal<Todo>();
+const [_addTodo, addTodo] = signal<string>();
 
-export const $trimmedNewTodoDescription = memo(() =>
-  $newTodoDescription().trim()
-);
+const addTodoSignal = computed(() => {
+  const description = _addTodo();
+  if (!description) return;
 
-on($addTodo, () => setNewTodoDescription(''));
+  return createTodo(description);
+});
+
+export { addTodoSignal, addTodo };

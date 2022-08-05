@@ -1,5 +1,5 @@
 import { signal } from 'spred';
 import { Todo } from './todo';
 
-export const [$toggleTodo, toggleTodo] = signal<Todo>();
-export const [$toggleAll, toggleAll] = signal();
+export const [toggleTodoSignal, toggleTodo] = signal<Todo>();
+export const [toggleAllSignal, toggleAll] = signal();

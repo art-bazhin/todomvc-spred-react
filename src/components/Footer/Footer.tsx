@@ -1,30 +1,30 @@
 import { memo } from 'react';
 import { useSignal } from 'spred-react';
-import { $filter, TodoFilter } from '../../model/filter';
-import { removeCompleted } from '../../model/remove';
-import { $activeTodosCount } from '../../model/todos-active';
-import { $allTodosCount } from '../../model/todos-all';
-import { $completedTodosCount } from '../../model/todos-completed';
+import { activeFilter, TodoFilter } from '../../model/active-filter';
+import { removeCompletedTodos } from '../../model/remove';
+import { activeTodosCount } from '../../model/todos-active';
+import { allTodosCount } from '../../model/todos-all';
+import { completedTodosCount } from '../../model/todos-completed';
 
 export const Footer = memo(() => {
   console.log('render Footer');
 
-  const filter = useSignal($filter);
-  const allTodosCount = useSignal($allTodosCount);
-  const activeTodosCount = useSignal($activeTodosCount);
-  const completedTodosCount = useSignal($completedTodosCount);
-  const isPlural = activeTodosCount !== 1;
+  const _filter = useSignal(activeFilter);
+  const _allTodosCount = useSignal(allTodosCount);
+  const _activeTodosCount = useSignal(activeTodosCount);
+  const _completedTodosCount = useSignal(completedTodosCount);
+  const isPlural = _activeTodosCount !== 1;
 
-  if (!allTodosCount) return null;
+  if (!_allTodosCount) return null;
 
   function getClassName(targetFilter: TodoFilter) {
-    return filter === targetFilter ? 'selected' : '';
+    return _filter === targetFilter ? 'selected' : '';
   }
 
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>{activeTodosCount}</strong> item{isPlural ? 's' : ''} left
+        <strong>{_activeTodosCount}</strong> item{isPlural ? 's' : ''} left
       </span>
       <ul className="filters">
         <li>
@@ -43,8 +43,8 @@ export const Footer = memo(() => {
           </a>
         </li>
       </ul>
-      {completedTodosCount ? (
-        <button className="clear-completed" onClick={removeCompleted}>
+      {_completedTodosCount ? (
+        <button className="clear-completed" onClick={removeCompletedTodos}>
           Clear completed
         </button>
       ) : null}

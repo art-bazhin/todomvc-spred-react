@@ -1,23 +1,17 @@
-import { memo } from 'react';
-import { memo as spredMemo } from 'spred';
-import { useSignal } from 'spred-react';
-import {
-  setNewTodoDescription,
-  addTodo,
-  $trimmedNewTodoDescription,
-} from '../../model/add';
-import { createTodo } from '../../model/todo';
+import { memo, useState } from 'react';
+import { addTodo } from '../../model/add';
 
 export const Header = memo(() => {
   console.log('render Header');
 
-  const newTodoDescription = useSignal($trimmedNewTodoDescription);
+  const [newTodoDescription, setNewTodoDescription] = useState('');
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'Enter' || !newTodoDescription) return;
 
     e.preventDefault();
-    addTodo(createTodo(newTodoDescription));
+    addTodo(newTodoDescription);
+    setNewTodoDescription('');
   };
 
   return (

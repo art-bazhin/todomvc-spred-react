@@ -1,16 +1,21 @@
 import { memo } from 'spred';
-import { $filter } from './filter';
-import { $activeTodoIds } from './todos-active';
-import { $allTodoIds } from './todos-all';
-import { $completedTodoIds } from './todos-completed';
+import { activeFilter } from './active-filter';
+import { getTodoSignal } from './store';
+import { activeTodos } from './todos-active';
+import { allTodos } from './todos-all';
+import { completedTodos } from './todos-completed';
 
-export const $filteredTodoIds = memo(() => {
-  switch ($filter()) {
+export const filteredTodos = memo(() => {
+  switch (activeFilter()) {
     case 'all':
-      return $allTodoIds();
+      return allTodos();
     case 'active':
-      return $activeTodoIds();
+      return activeTodos();
     case 'completed':
-      return $completedTodoIds();
+      return completedTodos();
   }
 });
+
+export const filteredTodoSignals = memo(() =>
+  filteredTodos().map((el) => getTodoSignal(el.id))
+);

@@ -1,43 +1,42 @@
-import { memo } from 'spred';
-import { $editedTodo, editTodo, setEditedTodo } from './edit';
+import { memo, Signal } from 'spred';
+import { editedTodo, editTodo, setEditedTodo } from './edit';
 import { removeTodos } from './remove';
-import { getTodoAtom } from './store';
+import { Todo } from './todo';
 import { toggleTodo } from './toggle';
 
-export function createTodoModel(id: string) {
-  const $todo = getTodoAtom(id);
-  const $editing = memo(() => $todo() === $editedTodo());
+const FALLBACK_TODO: Todo = {
+  id: 'REMOVED',
+  description: 'REMOVED',
+  completed: false,
+};
+
+export function createTodoModel(todoSignal: Signal<Todo | null>) {
+  const todo = memo(() => todoSignal() || FALLBACK_TODO);
+  const editing = memo(() => todo() === editedTodo());
 
   return {
-    $todo,
-    $editing,
+    todo,
+    editing,
 
     toggle() {
-      const todo = $todo();
-      if (!todo) return;
-
-      toggleTodo(todo);
+      toggleTodo(todo());
     },
 
     startEdit() {
-      const todo = $todo();
-      if (!todo) return;
-
-      setEditedTodo(todo);
+      setEditedTodo(todo());
     },
 
     endEdit(newDescription: string) {
-      const todo = $todo();
-      if (!todo) return;
-
       editTodo({
-        ...todo,
+        ...todo(),
         description: newDescription,
       });
     },
 
     remove() {
-      removeTodos([id]);
+      removeTodos([todo().id]);
     },
   };
 }
+
+export type TodoModel = ReturnType<typeof createTodoModel>;
