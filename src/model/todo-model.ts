@@ -1,36 +1,33 @@
 import { memo, Signal } from 'spred';
-import { editedTodo, editTodo, setEditedTodo } from './edit';
+import { editingId, endEdit, setEditingId } from './edit';
 import { removeTodos } from './remove';
 import { Todo } from './todo';
 import { toggleTodo } from './toggle';
 
 const FALLBACK_TODO: Todo = {
-  id: 'REMOVED',
-  description: 'REMOVED',
+  id: '-',
+  description: '-',
   completed: false,
 };
 
 export function createTodoModel(todoSignal: Signal<Todo | null>) {
   const todo = memo(() => todoSignal() || FALLBACK_TODO);
-  const editing = memo(() => todo() === editedTodo());
+  const editing = memo(() => todo().id === editingId());
 
   return {
     todo,
     editing,
 
     toggle() {
-      toggleTodo(todo());
+      toggleTodo(todo().id);
     },
 
     startEdit() {
-      setEditedTodo(todo());
+      setEditingId(todo().id);
     },
 
-    endEdit(newDescription: string) {
-      editTodo({
-        ...todo(),
-        description: newDescription,
-      });
+    endEdit(description: string) {
+      endEdit({ id: todo().id, description });
     },
 
     remove() {

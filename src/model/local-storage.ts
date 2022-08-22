@@ -1,35 +1,14 @@
-import { Todo } from './todo';
+import { AppState } from './state';
 
-interface TodoData {
-  [key: string]: Todo | null;
+const STATE_KEY = 'APP_STATE';
+
+export function getLocalStorageState() {
+  const str = localStorage.getItem(STATE_KEY);
+
+  if (!str) return null;
+  return JSON.parse(str) as AppState;
 }
 
-const DATA_KEY = 'TODO_DATA';
-const IDS_KEY = 'TODO_IDS';
-
-const idsString = localStorage.getItem(IDS_KEY);
-const ids: string[] = (idsString && JSON.parse(idsString)) || [];
-const maxId = +[...ids].sort((a, b) => +b - +a)[0];
-
-const dataString = localStorage.getItem(DATA_KEY);
-const data: TodoData = (dataString && JSON.parse(dataString)) || {};
-
-export function getLocalStorageData() {
-  return data;
-}
-
-export function setLocalStorageData(data: TodoData) {
-  localStorage.setItem(DATA_KEY, JSON.stringify(data));
-}
-
-export function getLocalStorageIds() {
-  return ids;
-}
-
-export function setLocalStorageIds(ids: string[]) {
-  localStorage.setItem(IDS_KEY, JSON.stringify(ids));
-}
-
-export function getLocalStorageMaxIdNumber() {
-  return maxId || 0;
+export function setLocalStorageState(state: AppState) {
+  localStorage.setItem(STATE_KEY, JSON.stringify(state));
 }

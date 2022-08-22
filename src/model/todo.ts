@@ -1,4 +1,4 @@
-import { getLocalStorageMaxIdNumber } from './local-storage';
+import { maxId } from './todos-all';
 
 export type TodoId = string;
 
@@ -8,7 +8,7 @@ export interface Todo {
   completed: boolean;
 }
 
-let idCounter = getLocalStorageMaxIdNumber();
+let idCounter = maxId() || 0;
 
 export function createTodo(description: string): Todo {
   return {

@@ -1,24 +1,25 @@
 import { memo, useMemo } from 'react';
+import { Signal } from 'spred';
 import { useSignal } from 'spred-react';
-import { getTodoSignal } from '../../model/store';
+import { Todo } from '../../model/todo';
 import { createTodoModel } from '../../model/todo-model';
 import { TodoItem } from './TodoItem';
 
 interface TodoItemAdapterProps {
-  id: string;
+  todo: Signal<Todo | null>;
 }
 
-export const TodoItemAdapter = memo(({ id }: TodoItemAdapterProps) => {
-  const model = useMemo(() => createTodoModel(getTodoSignal(id)), [id]);
+export const TodoItemAdapter = memo(({ todo }: TodoItemAdapterProps) => {
+  const model = useMemo(() => createTodoModel(todo), [todo]);
 
-  const todo = useSignal(model.todo, [model]);
+  const _todo = useSignal(model.todo, [model]);
   const editing = useSignal(model.editing, [model]);
 
   if (!todo) return null;
 
   return (
     <TodoItem
-      todo={todo}
+      todo={_todo}
       editing={editing}
       toggle={model.toggle}
       remove={model.remove}

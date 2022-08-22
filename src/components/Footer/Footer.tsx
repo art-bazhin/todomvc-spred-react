@@ -1,10 +1,12 @@
 import { memo } from 'react';
 import { useSignal } from 'spred-react';
 import { activeFilter, TodoFilter } from '../../model/active-filter';
-import { removeCompletedTodos } from '../../model/remove';
 import { activeTodosCount } from '../../model/todos-active';
 import { allTodosCount } from '../../model/todos-all';
-import { completedTodosCount } from '../../model/todos-completed';
+import {
+  completedTodosCount,
+  removeCompetedTodos,
+} from '../../model/todos-completed';
 
 export const Footer = memo(() => {
   console.log('render Footer');
@@ -44,7 +46,7 @@ export const Footer = memo(() => {
         </li>
       </ul>
       {_completedTodosCount ? (
-        <button className="clear-completed" onClick={removeCompletedTodos}>
+        <button className="clear-completed" onClick={removeCompetedTodos}>
           Clear completed
         </button>
       ) : null}

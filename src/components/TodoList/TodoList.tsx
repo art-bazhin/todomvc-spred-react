@@ -28,7 +28,7 @@ export const TodoList = memo(() => {
 
       <ul className="todo-list">
         {_filteredTodos.map((todo) => (
-          <TodoItemAdapter id={todo.id} key={todo.id} />
+          <TodoItemAdapter todo={todo} key={todo()!.id} />
         ))}
       </ul>
     </section>

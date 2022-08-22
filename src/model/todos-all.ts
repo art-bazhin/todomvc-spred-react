@@ -1,34 +1,20 @@
-import { on, signal, memo } from 'spred';
-import { addTodoSignal } from './add';
-import { removeTodosSignal } from './remove';
-import { getLocalStorageIds, setLocalStorageIds } from './local-storage';
-import { getTodo } from './store';
-import { Todo } from './todo';
+import { memo } from 'spred';
+import { select } from './store';
 
-const todoIds = getLocalStorageIds();
+export const todoIdsStore = select('todoIds');
+export const todosStore = select('todos');
 
-export const [allTodoIds, setAllTodoIds] = signal(todoIds);
+export const allTodoIds = todoIdsStore.state;
 
-export const allTodos = memo(
-  () =>
-    allTodoIds()
-      .map(getTodo)
-      .filter((el) => el) as Todo[]
+export const allTodos = memo(() =>
+  allTodoIds().map((id) => todosStore.select(id).state)
 );
 
-export const allTodosCount = memo(() => allTodoIds().length);
+export const allTodosCount = memo(() => todoIdsStore.state().length);
 
-on(allTodoIds, setLocalStorageIds);
+export const maxId = memo(() => {
+  const ids = allTodoIds().map((value) => +value);
+  ids.push(0);
 
-on(addTodoSignal, (todo) => {
-  const arr = allTodoIds();
-
-  arr.push(todo.id);
-  setAllTodoIds(arr);
-});
-
-on(removeTodosSignal, (removedTodoIds) => {
-  const ids = allTodoIds();
-
-  setAllTodoIds(ids.filter((id) => !removedTodoIds.includes(id)));
+  return Math.max(...ids);
 });

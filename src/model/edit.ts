@@ -1,15 +1,24 @@
 import { on, signal } from 'spred';
 import { removeTodos } from './remove';
-import { Todo } from './todo';
+import { TodoId } from './todo';
+import { todosStore } from './todos-all';
 
-type EditedTodo = Todo;
+export const [editingId, setEditingId] = signal<TodoId | null>(null);
+export const [endEditSignal, endEdit] = signal<{
+  id: TodoId;
+  description: string;
+}>();
 
-export const [editedTodo, setEditedTodo] = signal<Todo | null>(null);
-export const [editTodoSignal, editTodo] = signal<EditedTodo>();
+on(endEditSignal, ({ id, description }) => {
+  setEditingId(null);
 
-on(editTodoSignal, (todo) => {
-  setEditedTodo(null);
-  if (!todo.description) removeTodos([todo.id]);
+  if (!description) {
+    removeTodos([id]);
+    return;
+  }
+
+  todosStore.select(id).update((state) => {
+    if (!state) return;
+    state.description = description;
+  });
 });
-
-(window as any).test = editTodo;
