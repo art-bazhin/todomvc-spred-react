@@ -1,6 +1,6 @@
 import { computed, on, signal } from 'spred';
 import { createTodo } from './todo';
-import { todoIdsStore, todosStore } from './todos-all';
+import { todoIds, todos } from './todos-all';
 
 const [_addTodo, addTodo] = signal<string>();
 
@@ -14,11 +14,11 @@ const addTodoSignal = computed(() => {
 export { addTodo, addTodoSignal };
 
 on(addTodoSignal, (todo) => {
-  todoIdsStore.update((state) => {
+  todoIds.update((state) => {
     state.push(todo.id);
   });
 
-  todosStore.update((state) => {
+  todos.update((state) => {
     state[todo.id] = todo;
   });
 });

@@ -1,7 +1,7 @@
 import { on, signal } from 'spred';
 import { removeTodos } from './remove';
 import { TodoId } from './todo';
-import { todosStore } from './todos-all';
+import { todos } from './todos-all';
 
 export const [editingId, setEditingId] = signal<TodoId | null>(null);
 export const [endEditSignal, endEdit] = signal<{
@@ -17,7 +17,7 @@ on(endEditSignal, ({ id, description }) => {
     return;
   }
 
-  todosStore.select(id).update((state) => {
+  todos.select(id).update((state) => {
     if (!state) return;
     state.description = description;
   });

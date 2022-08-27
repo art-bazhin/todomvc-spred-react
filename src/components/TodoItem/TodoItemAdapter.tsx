@@ -12,8 +12,8 @@ interface TodoItemAdapterProps {
 export const TodoItemAdapter = memo(({ todo }: TodoItemAdapterProps) => {
   const model = useMemo(() => createTodoModel(todo), [todo]);
 
-  const _todo = useSignal(model.todo, [model]);
-  const editing = useSignal(model.editing, [model]);
+  const _todo = useSignal(model.todo);
+  const editing = useSignal(model.editing);
 
   if (!todo) return null;
 

@@ -2,7 +2,7 @@ import { on, store } from 'spred';
 import { getLocalStorageState, setLocalStorageState } from './local-storage';
 import { INITIAL_STATE } from './state';
 
-export const { state, select } = store(getLocalStorageState() || INITIAL_STATE);
+export const state = store(getLocalStorageState() || INITIAL_STATE);
 
 on(state, setLocalStorageState);
 

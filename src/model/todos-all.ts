@@ -1,19 +1,15 @@
 import { memo } from 'spred';
-import { select } from './store';
+import { state } from './store';
 
-export const todoIdsStore = select('todoIds');
-export const todosStore = select('todos');
+export const todoIds = state.select('todoIds');
+export const todos = state.select('todos');
 
-export const allTodoIds = todoIdsStore.state;
+export const allTodos = memo(() => todoIds().map((id) => todos.select(id)));
 
-export const allTodos = memo(() =>
-  allTodoIds().map((id) => todosStore.select(id).state)
-);
-
-export const allTodosCount = memo(() => todoIdsStore.state().length);
+export const allTodosCount = memo(() => todoIds().length);
 
 export const maxId = memo(() => {
-  const ids = allTodoIds().map((value) => +value);
+  const ids = todoIds().map((value) => +value);
   ids.push(0);
 
   return Math.max(...ids);
