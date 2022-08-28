@@ -14,11 +14,11 @@ const addTodoSignal = computed(() => {
 export { addTodo, addTodoSignal };
 
 on(addTodoSignal, (todo) => {
-  todoIds.produce((state) => {
+  todoIds.update((state) => {
     state.push(todo.id);
   });
 
-  todos.produce((state) => {
+  todos.update((state) => {
     state[todo.id] = todo;
   });
 });

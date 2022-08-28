@@ -17,7 +17,7 @@ on(endEditSignal, ({ id, description }) => {
     return;
   }
 
-  todos.select(id).produce((state) => {
+  todos.select(id).update((state) => {
     if (!state) return;
     state.description = description;
   });
