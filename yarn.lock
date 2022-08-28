@@ -10248,17 +10248,17 @@
   dependencies:
     "extend-shallow" "^3.0.0"
 
-"spred-react@^0.1.7":
-  "integrity" "sha512-seFiWL0RCP2IMkTim+VTwNsRKKNYgIP6VYCu+/rZN3tdYoBnyEz5rojmEs/VimSOpDoLt+ksmmmkXBwpvh252A=="
-  "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.1.7.tgz"
-  "version" "0.1.7"
+"spred-react@^0.1.8":
+  "integrity" "sha512-TGWbKCyeTfy/1DRWtGwyfJQwpLgGPQCjBvXlyvdQKjYnHPurTxQ2x81IdrNOVN9angAJgKXUdtRJGSYdd37V2Q=="
+  "resolved" "https://registry.npmjs.org/spred-react/-/spred-react-0.1.8.tgz"
+  "version" "0.1.8"
   dependencies:
     "use-sync-external-store" "^1.2.0"
 
-"spred@^0.23.2", "spred@>=0.23.0":
-  "integrity" "sha512-saZJk/YIyA9X0tDGM00mSdEeiy1nXSbdpHPWOe0XlwXBhLUZFe/p09LdcnllXY+RoNQ9wtqsItMCaUQ75WFx9g=="
-  "resolved" "https://registry.npmjs.org/spred/-/spred-0.23.2.tgz"
-  "version" "0.23.2"
+"spred@^0.24.0", "spred@>=0.23.0":
+  "integrity" "sha512-bMuHMLnd68Am+jicRoKTFRiW5RoWGXkBCMZcHE+wILknBwryQg4BrDQ6MvRDMmm72s/s+KERn9U6qWaPqd97rg=="
+  "resolved" "https://registry.npmjs.org/spred/-/spred-0.24.0.tgz"
+  "version" "0.24.0"
 
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="
