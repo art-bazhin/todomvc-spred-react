@@ -10255,10 +10255,10 @@
   dependencies:
     "use-sync-external-store" "^1.2.0"
 
-"spred@^0.25.0", "spred@>=0.23.0":
-  "integrity" "sha512-sq8der4W2wIlbga4NC8diG5xM0AuqmuFzb7ZZ3x6+oA99q12wCGMqgsjwp31LUGZ+ZKYF22eC+FDNqlq6Fzutg=="
-  "resolved" "https://registry.npmjs.org/spred/-/spred-0.25.0.tgz"
-  "version" "0.25.0"
+"spred@^0.25.1", "spred@>=0.23.0":
+  "integrity" "sha512-KeG4ZDYPHW3LHoQ+1tZU6go8r/pj8ZjMgnERcrMvrfkMenwVpbdshryUOssnBhOdWUBHqng6pBQ6CDL+boonig=="
+  "resolved" "https://registry.npmjs.org/spred/-/spred-0.25.1.tgz"
+  "version" "0.25.1"
 
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="
